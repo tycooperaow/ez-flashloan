@@ -3,9 +3,8 @@ pragma solidity >=0.4.24;
 import "openzeppelin-solidity/contracts/token/ERC20/ERC20.sol";
 import "openzeppelin-solidity/contracts/token/ERC20/SafeERC20.sol";
 
-import "openzeppelin-solidity/contracts/Ownership/Ownable.sol";
 
-contract Withdrawable is Ownable {
+contract Withdrawable {
     using SafeERC20 for ERC20;
     address constant ETHER = address(0);
 
@@ -19,7 +18,7 @@ contract Withdrawable is Ownable {
      * @dev Withdraw asset.
      * @param _assetAddress Asset to be withdrawn.
      */
-    function withdraw(address _assetAddress) public onlyOwner {
+    function withdraw(address _assetAddress) public {
         uint assetBalance;
         if (_assetAddress == ETHER) {
             address self = address(this); // workaround for a possible solidity bug
