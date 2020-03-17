@@ -3,9 +3,9 @@ pragma solidity ^0.5.15;
 import "./aave/FlashLoanReceiverBase.sol";
 import "./aave/ILendingPoolAddressesProvider.sol";
 import "./aave/ILendingPool.sol";
+import "./Flashloan.sol";
 
-contract Flashloan is FlashLoanReceiverBase {
-    address daiAddress = address(0x03e972809c6f93AeE4E7fb784ff96c0E9489F60c);
+contract FlashloanMock is Flashloan {
 
     function executeOperation(
         address _reserve,
@@ -26,13 +26,7 @@ contract Flashloan is FlashLoanReceiverBase {
         transferFundsBackToPoolInternal(_reserve, totalDebt);
     }
 
-    function flashloan() public  {
-        bytes memory data = "";
-        uint amount = 1 ether;
-        //address asset = address(0x6B175474E89094C44Da98b954EedeAC495271d0F); // mainnet DAI
-        address asset = daiAddress; // local testnet DAI !! it changes at every migrate
-
-        ILendingPool lendingPool = ILendingPool(addressesProvider.getLendingPool());
-        lendingPool.flashLoan(address(this), asset, amount, data);
+    function setDaiAddress(address _daiAddress) public {
+      address daiAddress = address(_daiAddress);
     }
 }
