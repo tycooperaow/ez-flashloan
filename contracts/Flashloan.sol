@@ -29,8 +29,8 @@ contract Flashloan is FlashLoanReceiverBase {
     function flashloan() public  {
         bytes memory data = "";
         uint amount = 1 ether;
-        //address asset = address(0x6B175474E89094C44Da98b954EedeAC495271d0F); // mainnet DAI
-        address asset = daiAddress; // local testnet DAI !! it changes at every migrate
+        address asset = address(0x6B175474E89094C44Da98b954EedeAC495271d0F); // mainnet DAI
+        //address asset = daiAddress; // local testnet DAI !! it changes at every migrate
 
         ILendingPool lendingPool = ILendingPool(addressesProvider.getLendingPool());
         lendingPool.flashLoan(address(this), asset, amount, data);
