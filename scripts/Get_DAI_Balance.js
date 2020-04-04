@@ -8,7 +8,7 @@ var web3_2 = require("eth-balance-checker/lib/web3");
 var web3 = new web3_1["default"]('http://localhost:8545');
 //mainet account with lots of ETH and DAI
 var accountAddress = '0x4E83362442B8d1beC281594cEa3050c8EB01311C';
-var contractAddress = '0x462274BF7e0E07C8f61423AB90D129bdE536DFcf';
+var contractAddress = '0xD7206a08e46a786c654F2c433C9E6411796B92e4';
 var tokens = ['0x6B175474E89094C44Da98b954EedeAC495271d0F'];
 
 

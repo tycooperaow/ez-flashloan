@@ -7,6 +7,9 @@ import "./aave/ILendingPool.sol";
 contract Flashloan is FlashLoanReceiverBase {
     address daiAddress = address(0x03e972809c6f93AeE4E7fb784ff96c0E9489F60c);
 
+    //Events
+    event borrowMade(address _reserve, uint256 _amount, uint256 _value);
+
     function executeOperation(
         address _reserve,
         uint256 _amount,
@@ -20,6 +23,8 @@ contract Flashloan is FlashLoanReceiverBase {
         //
         // do your thing here
         //
+
+        emit borrowMade(_reserve, _amount, address(this).balance);
 
         // Time to transfer the funds back
         uint totalDebt = _amount.add(_fee);
