@@ -5,8 +5,9 @@ const daiABI = [{"inputs":[{"internalType":"uint256","name":"chainId_","type":"u
 
 const fs = require('fs');
 const Flashloan = JSON.parse(fs.readFileSync("../client/src/contracts/Flashloan.json"));
-const run = async () => {
-  try {
+
+
+module.exports = async function (callback) {
 
       //creating Flashloan contract instance
       console.log("Creating instance of Flashloan contract");
@@ -30,7 +31,7 @@ const run = async () => {
       //console.log(transferResult);
 
       // executing flashLoan
-      console.log('Executing flashloan');
+      console.log('Executing flashloan, triggering fallbak function with sending ETH to contract');
       // tried also like this to triger fallback function in Flashloan contract
       //let flashloanResult = await flashloan.methods.flashloan().call();
       let flashloanResult = await web3.eth.sendTransaction({
@@ -39,11 +40,12 @@ const run = async () => {
         value: web3.utils.toWei('0.2', 'ether')
       });
       console.log(flashloanResult);
+      console.log('finished execution of Flashloan');
 
-  } catch (err) {
-      console.log(err.message);
-  }
+
+     //result = await flashloan.methods().call();
+     //console.log(result.logs[0].args);
+     console.log('end');
+
+
 }
-
-
-run();
