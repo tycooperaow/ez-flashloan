@@ -28,12 +28,12 @@ module.exports = async function (callback) {
       //console.log(exchangeContract);
 
       //getting prices for DAI to ETH trade
-      getEthToTokenInputPrice = await exchangeContract.methods.getEthToTokenInputPrice(100).call();
+      getEthToTokenInputPrice = await exchangeContract.methods.getEthToTokenInputPrice(1).call();
       console.log('getEthToTokenInputPrice: ' + getEthToTokenInputPrice);
-      getEthToTokenOutputPrice = await exchangeContract.methods.getEthToTokenOutputPrice(100).call();
+      getEthToTokenOutputPrice = await exchangeContract.methods.getEthToTokenOutputPrice(1).call();
       console.log('getEthToTokenOutputPrice: ' + getEthToTokenOutputPrice);
-      getTokenToEthInputPrice = await exchangeContract.methods.getTokenToEthInputPrice(100).call();
+      getTokenToEthInputPrice = await exchangeContract.methods.getTokenToEthInputPrice(1).call();
       console.log('getTokenToEthInputPrice: ' + getTokenToEthInputPrice)
-      getTokenToEthOutputPrice = await exchangeContract.methods.getTokenToEthOutputPrice(100).call();
+      getTokenToEthOutputPrice = await exchangeContract.methods.getTokenToEthOutputPrice(1).call();
       console.log('getTokenToEthOutputPrice: ' + getTokenToEthOutputPrice)
 }
