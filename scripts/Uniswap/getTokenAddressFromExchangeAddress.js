@@ -9,16 +9,15 @@ const exchangeABI =
 module.exports = async function (callback) {
 
       //creating Uniswap Factory instance, we connect it to address from mainnet
-      console.log("Creating instance of Uniswap Factory contract");
-      const factoryAddress = "0xc0a47dFe034B400B47bDaD5FecDa2621de6c4d95";
+      console.log('Creating instance of Uniswap Factory contract');
+      const factoryAddress = '0xc0a47dFe034B400B47bDaD5FecDa2621de6c4d95';
       const factoryContract = new web3.eth.Contract(factoryABI, factoryAddress);
       //console.log(factoryContract);
 
-      //getting Uniswap exchange address for DAI
-      console.log('Getting uniswap DAI Exchange address')
-      const tokenAddress = "0x6B175474E89094C44Da98b954EedeAC495271d0F";
-      const exchangeAddress = await factoryContract.methods.getExchange(tokenAddress).call();
-      console.log('Uniswap exchange address for DAI:');
-      console.log(exchangeAddress);
+      console.log('Getting Token address from Uniswap Exchange address')
+      const exchangeAddress = '0x2a1530C4C41db0B0b2bB646CB5Eb1A67b7158667';
+      const tokenAddress = await factoryContract.methods.getToken(exchangeAddress).call();
+      console.log('Token address: ');
+      console.log(tokenAddress);
 
 }
