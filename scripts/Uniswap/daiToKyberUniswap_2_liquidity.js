@@ -20,15 +20,24 @@ const contractUniswap = new web3.eth.Contract(
 
 console.log('Uniswap DAI exchange contract was created')
 
+console.log('Current liquidity reserve:');
+const ethReserve = await web3.eth.getBalance(addressTo);
+console.log(ethReserve);
+
+
+block = await web3.eth.getBlock('latest');
+console.log('latest block')
+console.log(block);
+
+
 const DEADLINE = 1742680400 // deadline = w3.eth.getBlock(w3.eth.blockNumber).timestamp
+console.log(DEADLINE);
+const DEADLINE2 = block.timestamp+300;
+console.log(DEADLINE2);
 const ETH_ADDED = web3.utils.toHex(1*10**17) // 0.1 ETH
 const TOKEN_ADDED = web3.utils.toHex(15*10**18) // 15 DAI tokens
-const tx = contractUniswap.methods.addLiquidity(1, TOKEN_ADDED, DEADLINE);
+const tx = contractUniswap.methods.addLiquidity(1, TOKEN_ADDED, DEADLINE2);
 const encodedABI = tx.encodeABI();
-
-console.log('output of the latest transaction parameters to see gas limit');
-block = await web3.eth.getBlock("latest");
-console.log(block);
 
 console.log("Adding DAI liquidity transaction will be sent")
 
