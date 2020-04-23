@@ -66,13 +66,23 @@ module.exports = async function(callback) {
     console.log(`Successful liquidty txId: ${resultLiquidity.transactionHash}`)
 
     // Perform Swap
-    //console.log('Performing swap...')
-    //const KNC_BOUGHT = web3.utils.toHex(10*10**18) //10 KNC tokens
-    //const MAX_TOKENS_SOLD = web3.utils.toHex(80*10**18) //80 KNC tokens
-    //const MAX_ETH_SOLD = web3.utils.toHex(1*10**17)
-    //let result
-    //result = await exchangeContract.methods.tokenToTokenTransferOutput(KNC_BOUGHT, MAX_TOKENS_SOLD, MAX_ETH_SOLD, DEADLINE, SETTINGS.from, KNC_TOKEN_ADDRESS).send({from : SETTINGS.from, value: 100000000 })
-    //console.log(`Successful Swap txId: ${result.transactionHash}`)
+    console.log('Performing swap...')
+    const KNC_BOUGHT = web3.utils.toHex(10*10**18) //10 KNC tokens
+    const MAX_TOKENS_SOLD = web3.utils.toHex(80*10**18) //80 KNC tokens
+    const MAX_ETH_SOLD = web3.utils.toHex(1*10**17)
+    let result
+
+    // produces Error: Returned error: VM Exception while processing transaction: invalid JUMP at 72e826
+    // so I tried to solve this like you instructed me in case of problem from line 65 -> adding liquidity
+    // https://github.com/Uniswap/uniswap-v1/issues/25#issuecomment-466806542
+    //result = await exchangeContract.methods.tokenToTokenTransferOutput(KNC_BOUGHT, MAX_TOKENS_SOLD, MAX_ETH_SOLD, DEADLINE, SETTINGS.from, KNC_ADDRESS).send({from : SETTINGS.from})
+
+    // produces Error: "Can not send value to non-payable contract method or constructor ..."
+    // probably related with tweets 3/12, 4/12, 5/12 in this tweet
+    // https://twitter.com/dmihal/status/1251505373992845317
+    result = await exchangeContract.methods.tokenToTokenTransferOutput(KNC_BOUGHT, MAX_TOKENS_SOLD, MAX_ETH_SOLD, DEADLINE, SETTINGS.from, KNC_ADDRESS).send({from : SETTINGS.from, value: 100000000 })
+
+    console.log(`Successful Swap txId: ${result.transactionHash}`)
 
     // Check Ether balance AFTER swap
     balance = await web3.eth.getBalance(SETTINGS.from)
