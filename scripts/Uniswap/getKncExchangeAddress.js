@@ -11,11 +11,11 @@ module.exports = async function (callback) {
       const factoryContract = new web3.eth.Contract(factoryABI, factoryAddress);
       //console.log(factoryContract);
 
-      //getting Uniswap exchange address for DAI
-      console.log('Getting uniswap DAI Exchange address')
-      const tokenAddress = "0x6B175474E89094C44Da98b954EedeAC495271d0F";
+      //getting Uniswap exchange address for KNC
+      console.log('Getting uniswap KNC Exchange address')
+      const tokenAddress = "0xdd974d5c2e2928dea5f71b9825b8b646686bd200";
       const exchangeAddress = await factoryContract.methods.getExchange(tokenAddress).call();
-      console.log('Uniswap exchange address for DAI:');
+      console.log('Uniswap exchange address for KNC:');
       console.log(exchangeAddress);
 
 }
