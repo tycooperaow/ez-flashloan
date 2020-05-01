@@ -27,8 +27,14 @@ module.exports = async function (callback) {
 
       //transferring DAI from mainet Ethereum account to Flashloan contract
       console.log('Transfering DAI from Ethereum account to Flashloan contract');
-      let transferResult = await dai.methods.transfer(flashloanAddress, web3.utils.toWei('1000', 'Ether')).send({ from: '0x4E83362442B8d1beC281594cEa3050c8EB01311C' })
+      let transferResult = await dai.methods.transfer(flashloanAddress, web3.utils.toWei('150', 'Ether')).send({ from: '0x4E83362442B8d1beC281594cEa3050c8EB01311C' })
       //console.log(transferResult);
+
+      //showing balance of ETH and DAI before calling flashLoan
+      balanceDAI = await dai.methods.balanceOf(flashloanAddress).call()
+      console.log('Flashloan contract DAI balance: ' + web3.utils.fromWei(balanceDAI, 'Ether'))
+      balanceETH = await web3.eth.getBalance(flashloanAddress);
+      console.log('Flashloan contract ETH balance: ' + web3.utils.fromWei(balanceETH, 'Ether'))
 
       // executing flashLoan
       console.log('Executing flashloan, triggering fallbak function with sending ETH to contract');
@@ -37,15 +43,16 @@ module.exports = async function (callback) {
       let flashloanResult = await web3.eth.sendTransaction({
         from: '0x4E83362442B8d1beC281594cEa3050c8EB01311C',
         to: flashloanAddress,
-        value: web3.utils.toWei('0.2', 'ether')
+        value: web3.utils.toWei('1', 'ether')
       });
       console.log(flashloanResult);
       console.log('finished execution of Flashloan');
 
 
-     //result = await flashloan.methods().call();
-     //console.log(result.logs[0].args);
-     console.log('end');
-
+      //showing balance of ETH and DAI after calling flashLoan
+      balanceDAI = await dai.methods.balanceOf(flashloanAddress).call()
+      console.log('Flashloan contract DAI balance: ' + web3.utils.fromWei(balanceDAI, 'Ether'))
+      balanceETH = await web3.eth.getBalance(flashloanAddress);
+      console.log('Flashloan contract ETH balance: ' + web3.utils.fromWei(balanceETH, 'Ether'))
 
 }
