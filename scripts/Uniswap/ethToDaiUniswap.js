@@ -8,7 +8,6 @@ var abi = '[{"name": "TokenPurchase", "inputs": [{"type": "address", "name": "bu
 let web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 // the address that will send the test transaction
 const addressFrom = '0x4E83362442B8d1beC281594cEa3050c8EB01311C'
-const privKey = process.env.privateKey
 // the Uniswap exchange contract address for DAI
 const addressTo = '0x2a1530C4C41db0B0b2bB646CB5Eb1A67b7158667'
 const contract = new web3.eth.Contract(
