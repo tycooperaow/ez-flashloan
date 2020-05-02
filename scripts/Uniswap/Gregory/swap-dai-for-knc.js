@@ -66,7 +66,7 @@ module.exports = async function(callback) {
     console.log('Performing swap from ' + web3.utils.fromWei('20000000000000000000'))
 
     let result
-    result = await exchangeContract.methods.tokenToTokenSwapInput(DAI_TO_SWAP, MIN_TOKENS, MIN_ETH, DEADLINE, KNC_ADDRESS).send({from : SETTINGS.from, gasLimit : SETTINGS.gasLimit})
+    result = await exchangeContract.methods.tokenToTokenSwapInput(DAI_TO_SWAP, MIN_TOKENS, MIN_ETH, DEADLINE, KNC_ADDRESS).send({from : SETTINGS.from, gasLimit : 4000000})
 
     console.log(`Successful Swap txId: ${result.transactionHash}`)
 
