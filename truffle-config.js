@@ -1,5 +1,5 @@
 const path = require("path");
-const HDWalletProvider = require("@truffle/hdwallet-provider")
+// const HDWalletProvider = require("@truffle/hdwallet-provider")
 require("dotenv").config()
 
 module.exports = {
@@ -10,9 +10,9 @@ module.exports = {
     development: {
       host: "127.0.0.1",
       port: 8545,
-      // gas: 20000000,
+      // gas: 20000000000,
       network_id: "*",
-      skipDryRun: true,      
+      skipDryRun: true,
     },
     // mainnet: {
     //   provider: new HDWalletProvider(process.env.KEY, "https://mainnet.infura.io/" + process.env.INFURA_API_KEY),
@@ -23,10 +23,14 @@ module.exports = {
   },
   compilers: {
     solc: {
-      version: "0.5.16",
-      settings: {
-        evmVersion: "constantinople"
-      }
+      optimizer: {
+        enabled: true,
+        runs: 200
+      },
+      // version: "0.5.15",
+      // settings: {
+      //   evmVersion: "constantinople"
+      // }
     }
   }
 }

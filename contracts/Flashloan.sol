@@ -1,4 +1,4 @@
-pragma solidity ^0.5.15;
+pragma solidity ^0.5.0;
 
 import "./aave/FlashLoanReceiverBase.sol";
 import "./aave/ILendingPoolAddressesProvider.sol";
@@ -33,7 +33,7 @@ contract Flashloan is FlashLoanReceiverBase {
 
     function flashloan() public  {
         bytes memory data = "";
-        uint amount = 1 ether;
+        uint amount = 10 ether;
         address asset = address(0x6B175474E89094C44Da98b954EedeAC495271d0F); // mainnet DAI
         //address asset = daiAddress; // local testnet DAI !! it changes at every migrate
 
